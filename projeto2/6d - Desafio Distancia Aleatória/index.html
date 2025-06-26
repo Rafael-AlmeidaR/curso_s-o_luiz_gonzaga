@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<body>
+    <canvas id="canvas" width="1024" height="768"></canvas>
+    <script>
+        canvas = document.getElementById("canvas");
+        context = canvas.getContext("2d");
+
+        distancia_da_rede = Math.trunc(Math.random() * 864 + 80);
+        altura_arremesso = 523;
+        chao = 649;
+        bola_x = distancia_da_rede;
+        bola_y = 496;
+
+        atrito = 0.77;
+        atrito_tabela = 0.256;
+
+        bola_x_aceleracao = 0;
+        bola_y_aceleracao = 2;
+
+        alert("Sua proximidade com a Cesta é: ");
+        alert(distancia_da_rede);
+        bola_y_velocidade = Number(prompt("Valor da Força Y (Negativo):"));
+        bola_x_velocidade = Number(prompt("Valor da Força X (Positivo):"));
+
+        if (bola_y_velocidade > -5) {
+            bola_y_velocidade = -5;
+        }
+        if (bola_y_velocidade < -60) {
+            bola_y_velocidade = -60;
+        }
+
+        if (bola_x_velocidade < 5) {
+            bola_x_velocidade = 5;
+        }
+        if (bola_x_velocidade > 60) {
+            bola_x_velocidade = 60;
+        }
+
+        bola_raio = 18;
+
+        bola_cor = "coral";
+
+        hitbox = false;
+
+        pontos = 0;
+
+        FPS = 30;
+        timer = setInterval(loop, 1000 / FPS);
+
+        function loop() {
+            context.fillStyle = "bisque";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "DarkBlue";
+            context.fillRect(0, 653, canvas.width, 115);
+
+            context.fillStyle = "brown";
+            context.fillRect(distancia_da_rede - bola_raio, 538, 28, 115);
+
+            //Desenho Bola
+            context.fillStyle = bola_cor;
+            context.beginPath();
+            context.arc(bola_x, bola_y, bola_raio, 0, 2 * Math.PI);
+            context.fill();
+
+            // Aro
+            context.fillStyle = "black";
+            context.fillRect(974, 192, 51, 4);
+
+            context.beginPath();
+            context.strokeStyle = "gray";
+            context.lineWidth = 6;
+
+            context.moveTo(979, 196);
+            context.lineTo(979, 227);
+
+            context.moveTo(991, 196);
+            context.lineTo(991, 227);
+
+            context.moveTo(1004, 196);
+            context.lineTo(1004, 227);
+
+            context.moveTo(1017, 196);
+            context.lineTo(1017, 227);
+
+            context.stroke();
+
+            if (hitbox == true) {
+                context.fillStyle = "blue";
+                context.beginPath();
+                context.arc(977, 193, 2, 0, 2 * Math.PI);
+                context.fill();
+
+                context.fillStyle = "red";
+                context.beginPath();
+                context.arc(1000, 192, 5, 0, 2 * Math.PI);
+                context.fill();
+            }
+
+            bola_x = bola_x + bola_x_velocidade;
+            bola_y = bola_y + bola_y_velocidade;
+
+            bola_x_velocidade = bola_x_velocidade + bola_x_aceleracao;
+            bola_y_velocidade = bola_y_velocidade + bola_y_aceleracao;
+
+            //Colisao Chão e Teto
+            if (bola_y >= chao - bola_raio) {
+                bola_y = chao - bola_raio + 5;
+                bola_y_velocidade = bola_y_velocidade * atrito;
+                bola_y_velocidade = bola_y_velocidade * -1;
+            }
+
+            if (bola_y < bola_raio) {
+                bola_y = bola_raio;
+                bola_y_velocidade = bola_y_velocidade * atrito;
+                bola_y_velocidade = bola_y_velocidade * -1;
+            }
+
+            //Colisao Paredes
+            if (bola_x >= canvas.width - bola_raio) {
+                bola_x = canvas.width - bola_raio;
+
+                //Tabela
+                if (bola_y + bola_raio >= 115 && bola_y - bola_raio <= 230) {
+                    bola_y_velocidade = bola_y_velocidade * atrito;
+                    bola_y_velocidade = Math.abs(bola_y_velocidade);
+
+                    bola_x_velocidade = bola_x_velocidade * -1;
+                    bola_x_velocidade = bola_x_velocidade * atrito_tabela;
+                } else {
+                    bola_x_velocidade = bola_x_velocidade * atrito;
+                    bola_x_velocidade = bola_x_velocidade * -1;
+                }
+            }
+
+            if (bola_x <= bola_raio) {
+                bola_x = bola_raio;
+                bola_x_velocidade = bola_x_velocidade * atrito;
+                bola_x_velocidade = bola_x_velocidade * -1;
+            }
+
+            if (Math.hypot(bola_x - 977, bola_y - 193) <= bola_raio + 2) {
+                bola_x_velocidade = bola_x_velocidade * atrito;
+                bola_x_velocidade = bola_x_velocidade * -1;
+                bola_y_velocidade = bola_y_velocidade * atrito;
+                bola_y_velocidade = bola_y_velocidade * -1;
+
+                bola_x = bola_x + bola_x_velocidade;
+                bola_y = bola_y + bola_y_velocidade;
+            }
+
+            if (Math.hypot(1000 - bola_x, 192 - bola_y) <= bola_raio + 5) {
+                bola_cor = "Gold";
+            }
+        }
+    </script>
+</body>
+
+</html>
