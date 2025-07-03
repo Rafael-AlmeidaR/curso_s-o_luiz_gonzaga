@@ -1,0 +1,278 @@
+numero1 = Number(prompt("numero 1:"))
+numero2 = Number(prompt("numero 2:"))
+resultado = numero1+numero2
+alert(resultado)
+
+
+
+Base*Altura/2
+
+
+
+
+
+altura = Number(prompt("Qual o valor da altura?"))
+base = Number(prompt("Qual o valor da base?"))
+area = (base*altura)/2
+alert(area)
+
+
+
+
+
+
+
+
+==      != 
+
+
+
+
+
+
+algo = 5
+
+algo == 5
+
+
+
+
+
+
+>      <
+
+
+<=     >=
+
+
+-5 > -3
+
+
+
+
+
+
+
+Verificar se um número é positivo
+true se é positivo
+false se é negativo
+
+numero = Number(prompt("qual o numero?"))
+positivo = numero > 0
+alert(positivo)
+
+
+
+
+
+Verificar se um número é par
+
+numero = Number(prompt("qual o numero?"))
+par = (numero%2) == 0
+alert(par)
+
+
+
+
+
+Verificar se um número é múltiplo de 5
+
+numero = Number(prompt("qual o numero?"))  
+multiplo5 = (numero%5) == 0
+alert(multiplo5)
+
+
+
+
+
+
+5 + 5 = 10
+2 / 2 = 1
+5 - 2 = 3
+5 * 2 = 10
+5 % 2 = 1
+
+> < == != <= >=
+
+5 > 5 = false
+-3 > -5 = true
+
+3 < 1 = false
+
+2 <= 3
+-1 >= 0
+
+
+3 == 3
+-1 != 1
+
+
+
+
+
+
+abs, ceil, floor, trunc, sqrt, pow, random, hypot
+
+
+
+
+Math.abs(-11) = 11
+
+Math.ceil(-2.3) = -2
+
+Math.floor(-3.5) = -4
+
+Math.round(-2.3) = -2 
+Math.round(-2.6) = -3 
+
+Math.trunc(-2.3) = -2 
+
+Math.pow(3, 2) = 9
+
+Math.sqrt(16) = 4
+
+Math.hypot(3, 4) = 5
+
+Math.random()
+
+aleatorio = Math.random()
+entre = Math.trunc(aleatorio * 15)
+alert(entre) 
+
+
+
+
+
+
+aleatorio = Math.random()
+entre = Math.trunc(aleatorio * (30 - 10)) + 10
+alert(entre) 
+
+
+
+
+Gerar um número aleatório entre 150 e 200
+
+aleatorio = Math.random()
+entre = Math.trunc(aleatorio * (30 - 10)) + 10
+
+
+aleatorio = Math.random()
+entre = Math.trunc(aleatorio * (200 - 150)) + 150
+alert(entre)
+
+
+fazer um programa que calcule as raízes 
+a) x² - 5x + 6
+b) x² - 10x + 25
+
+b² -4 *a*c
+-b +- raiz de delta / 2 * a 
+ 
+a = Number(prompt("a"))
+b = Number(prompt("b"))
+c = Number(prompt("c"))
+delta = Math.pow(b, 2) - (4 * a * c) 
+raiz1 = (-b + Math.sqrt(delta)) / (2 * a) 
+raiz2 = (-b - Math.sqrt(delta)) / (2 * a)
+
+x² - 10x + 25
+
+2 + 3 * 5 = 25 ou 17  
+(2 + 3) * 5 = 25  
+2 + (3 * 5) = 17   
+
+Calcular a distância entre 
+dois pontos em uma reta
+
+ponto1 = Number(prompt("qual o ponto 1"))
+ponto2 = Number(prompt("qual o ponto 2"))
+distancia = Math.abs(ponto1 - ponto2)
+alert(distancia) 
+
+Calcular a distância entre 
+dois pontos em um plano
+
+x1 = Number(prompt("x1"))
+y1 = Number(prompt("y1"))
+x2 = Number(prompt("x2"))
+y2 = Number(prompt("y2"))
+distancia_x = Math.abs(x1 - x2)
+distancia_y = Math.abs(y1 - y2)
+distancia = Math.hypot(distancia_x, distancia_y)
+alert(distancia)
+
+
+
+
+
+
+
+
+if(distancia_soco >= distancia_entre_jogador_1_jogador_2)
+{
+  vida_jogador_2 = vida_jogador_2 - 10  
+}
+
+numero = Number(prompt("Digite seu número:"))
+if(numero >= 0)
+{	alert("Número Positivo")
+}
+else
+{   alert("Número Negativo")
+}
+
+Mostrar se o número que o usuário digitar
+é par ou é impar
+
+numero = Number(prompt("Digite seu número:"))
+if(numero % 2 == 0)
+{	alert("Número Par")
+}
+else
+{   alert("Número Ímpar")
+}
+
+
+
+
+
+
+Verificar se o número 1 é múltiplo do número 2
+
+numero_1 = 23
+numero_2 = 11 
+Não é múltiplo
+
+numero_1 = 22
+numero_2 = 11
+É múltiplo
+
+
+numero_1 = Number(prompt("Digite seu número 1:"))
+numero_2 = Number(prompt("Digite seu número 2:"))
+if(numero_1 % numero_2 == 0)
+{	alert("É Múltiplo")
+}
+else
+{	alert("Não é Múltiplo")
+}
+
+
+
+
+
+
+Mostrar se um número termina com 123
+
+30321 = Não termina com 123
+10123 = Termina com 123
+123 = Termina com 123
+
+numero = Number(prompt("Digite seu número:"))
+if(numero % 1000 == 123)
+{	alert("O número termina com 123")
+}
+else
+{	alert("O número não termina com 123")
+}
