@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<body>
+    <canvas id="canvas" width="1024" height="768"></canvas>
+    <script>
+        canvas = document.getElementById("canvas");
+        context = canvas.getContext("2d");
+
+        distancia_da_rede = Math.trunc(Math.random() * 864 + 80);
+        altura_arremesso = 523;
+        chao = 649;
+        bola_x = distancia_da_rede;
+        bola_y = 496;
+
+        if (distancia_da_rede <= 174) {
+            pontos_posicao = 5;
+        }
+        if (distancia_da_rede > 174 && distancia_da_rede < 533) {
+            pontos_posicao = 3;
+        }
+        if (distancia_da_rede >= 533) {
+            pontos_posicao = 2;
+        }
+
+        atrito = 0.77;
+        atrito_tabela = 0.256;
+
+        bola_x_aceleracao = 0;
+        bola_y_aceleracao = 2;
+
+        alert("Sua proximidade com a Cesta é: ");
+        alert(distancia_da_rede)
+        bola_y_velocidade = Number(prompt("Valor da Força Y (Negativo):"));
+        bola_x_velocidade = Number(prompt("Valor da Força X (Positivo):"));
+
+        if (bola_y_velocidade > -5) {
+            bola_y_velocidade = -5;
+        }
+        if (bola_y_velocidade < -60) {
+            bola_y_velocidade = -60;
+        }
+
+        if (bola_x_velocidade < 5) {
+            bola_x_velocidade = 5;
+        }
+        if (bola_x_velocidade > 60) {
+            bola_x_velocidade = 60;
+        }
+
+        bola_raio = 18;
+        hitbox = false;
+        pontos = 0;
+        start = false;
+
+        FPS = 30;
+        timer = setInterval(loop, 1000 / FPS);
+
+        function loop() {
+            context.fillStyle = "Bisque";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = "DarkBlue";
+            context.fillRect(0, 653, canvas.width, 115);
+
+            context.fillStyle = "brown";
+            context.fillRect(distancia_da_rede - bola_raio, 538, 28, 115);
+
+            context.font = "bold 36px 'Verdana'";
+            context.fillStyle = "black";
+            context.textAlign = "center";
+            context.textBaseline = "top";
+            context.fillText("Pontos: " + pontos, 102, 21);
+
+            // Marcas da Quadra
+            context.strokeStyle = "white";
+            context.lineWidth = 4;
+            context.font = "bold 24px 'Arial Black'";
+            context.fillStyle = "white";
+
+            context.beginPath();
+
+            // 5 Pontos
+            context.moveTo(174, 653);
+            context.lineTo(174, canvas.height);
+            context.fillText("5 PTS", 131, 683);
+
+            // 3 Pontos
+            context.moveTo(533, 653);
+            context.lineTo(533, canvas.height);
+            context.fillText("3 PTS", 490, 683);
+
+            // 2 Pontos
+            context.moveTo(922, 653);
+            context.lineTo(922, canvas.height);
+            context.fillText("2 PTS", 879, 683);
+
+            context.stroke();
+
+            // Desenho Bola
+            context.fillStyle = "coral";
+            context.beginPath();
+            context.arc(bola_x, bola_y, bola_raio, 0, 2 * Math.PI);
+            context.fill();
+
+            // Aro  
+            context.fillStyle = "black";
+            context.fillRect(945, 192, 80, 6);   
+
+            context.beginPath();
+            context.strokeStyle = "gray";
+            context.lineWidth = 8;   
+
+            context.moveTo(955, 196);
+            context.lineTo(955, 227);
+
+            context.moveTo(970, 196);
+            context.lineTo(970, 227);
+
+            context.moveTo(985, 196);
+            context.lineTo(985, 227);
+
+            context.moveTo(1000, 196);
+            context.lineTo(1000, 227);
+
+            context.moveTo(1015, 196);   
+            context.lineTo(1015, 227);
+
+            context.stroke();
+
+            if (hitbox == true) {
+                context.fillStyle = "blue";
+                context.beginPath();
+                context.arc(950, 195, 5, 0, 2 * Math.PI);   
+                context.fill();
+
+                context.fillStyle = "red";
+                context.beginPath();
+                context.arc(985, 205, 9, 0, 2 * Math.PI);   
+                context.fill();
+            }
+
+            // Colisao Chão e Teto
+            if (bola_y >= chao) {
+                alert("Jogo Acabou");
+            }
+            if (bola_y < bola_raio) {
+                alert("Jogo Acabou");
+            }
+            // Colisao Paredes
+            if (bola_x >=canvas.width) {
+                alert("Jogo Acabou");
+            }
+            if (bola_x <= bola_raio) {
+                alert("Jogo Acabou");
+            }
+            
+            bola_x = bola_x + bola_x_velocidade;
+            bola_y = bola_y + bola_y_velocidade;
+
+            bola_x_velocidade = bola_x_velocidade + bola_x_aceleracao;
+            bola_y_velocidade = bola_y_velocidade + bola_y_aceleracao;
+
+            if (Math.hypot(bola_x - 950, bola_y - 195) <= bola_raio + 5) {
+                bola_x_velocidade = bola_x_velocidade * atrito;
+                bola_x_velocidade = bola_x_velocidade * -1;
+                bola_y_velocidade = bola_y_velocidade * atrito;
+                bola_y_velocidade = bola_y_velocidade * -1;
+                
+                bola_x = bola_x + bola_x_velocidade;
+                bola_y = bola_y + bola_y_velocidade;
+            }
+
+            if (Math.hypot(985 - bola_x, 205 - bola_y) <= bola_raio + 9) {
+                pontos = pontos_posicao;
+            }
+        }
+    </script>
+</body>
+</html>
