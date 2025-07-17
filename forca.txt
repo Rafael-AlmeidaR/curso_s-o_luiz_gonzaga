@@ -1,0 +1,67 @@
+palavra = prompt("palavra de 5 letras?");
+letra = prompt("letra?");
+palavra = palavra.replaceAll(letra, "*");
+alert(palavra);
+
+//--------------------------------------------------------------------------
+
+palavra = prompt("palavra de 5 letras?");
+salva = palavra;
+while (palavra != "*****") {
+    letra = prompt("letra?");
+    palavra = palavra.replaceAll(letra, "*");
+    m = "";
+    m += (palavra.charAt(0) == "*") ? salva.charAt(0) : "-";
+    m += (palavra.charAt(1) == "*") ? salva.charAt(1) : "-";
+    m += (palavra.charAt(2) == "*") ? salva.charAt(2) : "-";
+    m += (palavra.charAt(3) == "*") ? salva.charAt(3) : "-";
+    m += (palavra.charAt(4) == "*") ? salva.charAt(4) : "-";
+    alert(m);
+}
+
+
+//----------------------------------------------------------------------------
+
+
+palavra = prompt("palavra de 5 letras?")
+salva = palavra
+while (palavra != "*****") {
+    letra = prompt("letra?")
+    palavra = palavra.replaceAll(letra, "*")
+    m = "";
+    if (palavra.charAt(0) == "*") {
+        m = m + salva.charAt(0)
+    }
+    else {
+        m = m + "-"
+    }
+    if (palavra.charAt(1) == "*") {
+        m = m + salva.charAt(1)
+    }
+    else {
+        m = m + "-"
+    }
+    if (palavra.charAt(2) == "*") {
+        m = m + salva.charAt(2)
+    }
+    else {
+        m = m + "-"
+    }
+    if (palavra.charAt(3) == "*") {
+        m = m + salva.charAt(3)
+    }
+    else {
+        m = m + "-"
+    }
+    if (palavra.charAt(4) == "*") {
+        m = m + salva.charAt(4)
+    }
+    else {
+        m = m + "-"
+    }
+
+    alert(m)
+}
+
+alert("GANHOU!!!")
+
